@@ -7,6 +7,10 @@ from utils import pp, visualize, to_json, show_all_variables
 
 import tensorflow as tf
 
+# flags is a class that help to take inputs from the commandline
+# In the command line, you can use --attributeName Value to
+# define an attribute of flags (can be accessed later using flags.FLAGS.name) and a default value.
+
 flags = tf.app.flags
 flags.DEFINE_integer("epoch", 25, "Epoch to train [25]")
 flags.DEFINE_float("learning_rate", 0.0002, "Learning rate of for adam [0.0002]")
@@ -41,7 +45,8 @@ def main(_):
   if not os.path.exists(FLAGS.sample_dir):
     os.makedirs(FLAGS.sample_dir)
 
-  #gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
+  # configure GPU
+  gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
   run_config = tf.ConfigProto()
   run_config.gpu_options.allow_growth=True
 
