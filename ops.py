@@ -27,12 +27,15 @@ else:
     return tf.concat(tensors, axis, *args, **kwargs)
 
 class batch_norm(object):
+  """This object perform batch normalization"""
   def __init__(self, epsilon=1e-5, momentum = 0.9, name="batch_norm"):
+    # variable scope is declared whose name is name
     with tf.variable_scope(name):
       self.epsilon  = epsilon
       self.momentum = momentum
       self.name = name
 
+  # this function is called with batch_norm()
   def __call__(self, x, train=True):
     return tf.contrib.layers.batch_norm(x,
                       decay=self.momentum, 
